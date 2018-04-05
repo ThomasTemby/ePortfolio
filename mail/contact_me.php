@@ -2,13 +2,13 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer-master/src/Exception.php';
-require 'PHPMailer-master/src/PHPMailer.php';
-require 'PHPMailer-master/src/SMTP.php';
+require './PHPMailer-master/src/Exception.php';
+require './PHPMailer-master/src/PHPMailer.php';
+require './PHPMailer-master/src/SMTP.php';
 
 // Check for empty fields
-if(empty($_POST['name'])  		||
-   empty($_POST['email']) 		||
+if(empty($_POST['name'])  	||
+   empty($_POST['email']) 	||
    empty($_POST['message'])	||
    !filter_var($_POST['email'],FILTER_VALIDATE_EMAIL))
    {
@@ -35,7 +35,7 @@ try {
     $mail->Host = 'mail.privateemail.com';                // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username = 'thomas@temby.com';                 // SMTP username
-    $mail->Password = 'Mnittia15';                        // SMTP password
+    $mail->Password = '*********';                        // SMTP password
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587;                                    // TCP port to connect to
 
@@ -49,8 +49,8 @@ try {
     $mail->AltBody = $email_body;
 
     $mail->send();
-    return true;
-} catch (Exception $e) {
     return false;
+} catch (Exception $e) {
+    return true;
 }
 ?>
