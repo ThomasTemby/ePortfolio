@@ -27,16 +27,15 @@ $email_subject = "Website Contact Form:  $name";
 $email_body = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nName: $name\n\nEmail: $email_address\n\nPhone: $phone\n\nMessage:\n$message";
 $headers = "From: noreply@temby.me\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
 $headers .= "Reply-To: $email_address";
-
 $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
 try {
     //Server settings
     $mail->SMTPDebug = 2;                                 // Enable verbose debug output
     $mail->isSMTP();                                      // Set mailer to use SMTP
-    $mail->Host = 'mail.privateemail.com';  // Specify main and backup SMTP servers
+    $mail->Host = 'mail.privateemail.com';                // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username = 'thomas@temby.com';                 // SMTP username
-    $mail->Password = 'Mnittia15';                           // SMTP password
+    $mail->Password = 'Mnittia15';                        // SMTP password
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 587;                                    // TCP port to connect to
 
@@ -50,11 +49,8 @@ try {
     $mail->AltBody = $email_body;
 
     $mail->send();
-    echo 'Message has been sent';
+    return true;
 } catch (Exception $e) {
-    echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+    return false;
 }
-
-mail($to,$email_subject,$email_body,$headers);
-return true;
 ?>
